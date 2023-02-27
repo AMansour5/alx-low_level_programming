@@ -6,17 +6,17 @@
  */
 void puts2(char *str)
 {
-int count;
-for (count = 0; *(str + count) != '\0'; ++count)
+int count = 0;
+
+while (count >= 0)
 {
-if (*(str + count) % 2 == 0)
+if (str[count] == '\0')
 {
-_putchar(*(str + count));
-}
-else
-{
-continue;
-}
-}
 _putchar('\n');
+break;
+}
+if (count % 2 == 0)
+_putchar(str[count]);
+count++;
+}
 }
