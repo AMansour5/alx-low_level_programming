@@ -11,49 +11,38 @@
  */
 char *string_nconcat(char *s1, char *s2, unsigned int n)
 {
-char *ptr;
-unsigned int i, j, k, limit;
+char *sout;
+unsigned int ls1, ls2, lsout, i;
 
 if (s1 == NULL)
-s1 = " ";
+s1 = "";
+
 if (s2 == NULL)
-s2 = " ";
+s2 = "";
 
-for (i = 0; s1[i] != '\0'; i++)
-;
-for (j = 0; s2[j] != '\0'; j++)
+for (ls1 = 0; s1[ls1] != '\0'; ls1++)
 ;
 
-if (n >= j)
-{
-ptr = malloc(sizeof(char) * (i + j + 1));
-if (ptr == NULL)
-{
-free(ptr);
+for (ls2 = 0; s2[ls2] != '\0'; ls2++)
+;
+
+if (n > ls2)
+n = ls2;
+
+lsout = ls1 + n;
+
+sout = malloc(lsout + 1);
+
+if (sout == NULL)
 return (NULL);
-}
 
-for (k = 0; k < i; k++)
-ptr[k] = s1[k];
-
-limit = j;
-for (j = 0; j <= limit; k++, j++)
-ptr[k] = s2[j];
-}
+for (i = 0; i < lsout; i++)
+if (i < ls1)
+sout[i] = s1[i];
 else
-{
-ptr = malloc(sizeof(char) * (i + n + 1));
-if (ptr == NULL)
-{
-free(ptr);
-return (NULL);
-}
+sout[i] = s2[i - ls1];
 
-for (k = 0; k < i; k++)
-ptr[k] = s1[k];
+sout[i] = '\0';
 
-for (j = 0; j <= n; k++, j++)
-ptr[k] = s2[j]; 
-}
-return (ptr);
+return (sout);
 }
